@@ -1,8 +1,37 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategory, fetchItems, getCategory } from "../redux/Slice";
 
-function Main({ data }) {
+function Main() {
+  const [value, setİtem] = useState("");
+  const [activeItem, setActiveItem] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const data = useSelector((state) => state.db);
+
+  const veri = useSelector((state) => state.db);
+
+  const handleChange = (item, i) => {
+    if (value) {
+      setİtem("");
+    }
+
+    setİtem(item);
+
+    setActiveItem(i === activeItem ? null : i);
+  };
+
+  useEffect(() => {
+    if (value) {
+      dispatch(getCategory(value));
+    } else {
+      dispatch(fetchItems());
+    }
+    dispatch(fetchCategory());
+  }, [dispatch, value]);
+
   return (
     <main className="container flex">
       <aside className=" basis-1/4 my-2">
@@ -12,69 +41,25 @@ function Main({ data }) {
               <div className="flex flex-col">
                 <div className="font-bold py-2 px-4">
                   <div className="flex items-center justify-between  cursor-pointer">
-                    Cinsiyet <IoIosArrowDown />
+                    Category <IoIosArrowDown />
                   </div>
                 </div>
-                <div className="flex justify-between px-4 py-2 my-2 items-center bg-slate-100  ">
-                  Erkek <input type="checkbox" />
-                </div>
-                <div className="flex justify-between px-4 py-2 mb-2  items-center bg-slate-100  ">
-                  Kadın <input type="checkbox" />
-                </div>
-                <div className="flex justify-between px-4 py-2 mb-2  items-center bg-slate-100  ">
-                  Erkek Çocuk <input type="checkbox" />
-                </div>
-                <div className="flex justify-between px-4 py-2 mb-2 items-center bg-slate-100  ">
-                  Kız Çocuk <input type="checkbox" />
-                </div>
-              </div>
-            </li>
-            <li>
-              <div className="flex flex-col">
-                <div className="font-bold py-2 px-4">
-                  <div className="flex items-center justify-between  cursor-pointer">
-                    Kategoriler <IoIosArrowDown />
-                  </div>
-                </div>
-                <div className="flex justify-between px-4 py-2 my-2 items-center bg-slate-100  ">
-                  Giyim <input type="checkbox" />
-                </div>
-                <div className="flex justify-between px-4 py-2 mb-2  items-center bg-slate-100  ">
-                  Takı <input type="checkbox" />
-                </div>
-                <div className="flex justify-between px-4 py-2 mb-2  items-center bg-slate-100  ">
-                  Elektronik <input type="checkbox" />
-                </div>
-              </div>
-            </li>
-            <li>
-              <div className="flex flex-col">
-                <div className="font-bold py-2 px-4">
-                  <div className="flex items-center justify-between  cursor-pointer">
-                    Ürünler <IoIosArrowDown />
-                  </div>
-                </div>
-                <div className="flex justify-between px-4 py-2 my-2 items-center bg-slate-100  ">
-                  Çantalar <input type="checkbox" />
-                </div>
-                <div className="flex justify-between px-4 py-2 mb-2  items-center bg-slate-100  ">
-                  Yüzükler <input type="checkbox" />
-                </div>
-                <div className="flex justify-between px-4 py-2 mb-2  items-center bg-slate-100  ">
-                  Bileklikler <input type="checkbox" />
-                </div>
-                <div className="flex justify-between px-4 py-2 mb-2  items-center bg-slate-100  ">
-                  Monitörler <input type="checkbox" />
-                </div>
-                <div className="flex justify-between px-4 py-2 mb-2  items-center bg-slate-100  ">
-                  Ssd <input type="checkbox" />
-                </div>
-                <div className="flex justify-between px-4 py-2 mb-2  items-center bg-slate-100  ">
-                  Montlar <input type="checkbox" />
-                </div>
-                <div className="flex justify-between px-4 py-2 mb-2  items-center bg-slate-100  ">
-                  Thsird <input type="checkbox" />
-                </div>
+                {veri.category &&
+                  veri.category?.map((eleman, i) => {
+                    return (
+                      <div
+                        key={i}
+                        className={`flex justify-between px-4 py-2 items-center bg-slate-100  ${
+                          i === activeItem ? "active" : ""
+                        }`}
+                        onClick={() => handleChange(eleman, i)}
+                      >
+                        <p className={` py-2 rounded-md px-4 w-full`}>
+                          {eleman}
+                        </p>
+                      </div>
+                    );
+                  })}
               </div>
             </li>
           </ul>
