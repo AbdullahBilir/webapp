@@ -29,24 +29,17 @@ function Main() {
 
   const [itemOffset, setItemOffset] = useState(0);
 
-  // Simulate fetching items from another resources.
-  // (This could be items from props; or items loaded in a local state
-  // from an API endpoint with useEffect and useState)
-  const itemsPerPage = 8;
+  const itemsPerPage = 6;
   const endOffset = itemOffset + itemsPerPage;
   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = data.products.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(data.products.length / itemsPerPage);
 
-  // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     const selectedPage = event.selected;
-    console.log(`User requested page number ${selectedPage}`);
-    setCurrentPage(selectedPage);
+
     const newOffset = (selectedPage * itemsPerPage) % data.products.length;
-    console.log(
-      `User requested page number ${selectedPage}, which is offset ${newOffset}`
-    );
+
     setItemOffset(newOffset);
   };
 
@@ -62,8 +55,8 @@ function Main() {
   console.log(data.products);
 
   return (
-    <main className="container ">
-      <div className="w-full p-4 bg-slate-100 my-4 mx-4 flex justify-end items-end">
+    <main className="container  ">
+      <div className="w-full p-4 bg-slate-100 my-4 flex justify-end  items-end mx-auto">
         <select
           onChange={(e) => {
             setSort(e.target.value);
@@ -76,8 +69,8 @@ function Main() {
         </select>
       </div>
       <div className="flex">
-        <aside className=" basis-1/4 my-2 ">
-          <div className="w-4/5 mx-auto">
+        <aside className=" basis-1/4 my-2 flex justify-center ">
+          <div className="w-4/5 ">
             <ul>
               <li>
                 <div className="flex flex-col ">
@@ -107,7 +100,7 @@ function Main() {
             </ul>
           </div>
         </aside>
-        <section className=" basis-3/4 flex flex-wrap justify-center ">
+        <section className=" basis-3/4 flex flex-wrap justify-center   ">
           {data.loading === true ? (
             <Loading />
           ) : (
@@ -124,10 +117,10 @@ function Main() {
                 return (
                   <div
                     key={eleman.id}
-                    className={`w-1/5 border-solid  border-black m-2 hover:border-2 rounded-md h-72 flex flex-col justify-center items-center text-center cursor-pointer  `}
+                    className={`w-1/3 border-solid w-[275px]   border-black m-2 hover:border-2 rounded-md h-72 flex flex-col  items-center justify-center text-center cursor-pointer  `}
                   >
                     <img
-                      className=" w-28 h-28  object-contain my-1"
+                      className=" w-28 h-28 object-contain my-1"
                       src={eleman.image}
                     />
                     <h1 className=" text-xs font-bold my-1">
@@ -146,7 +139,7 @@ function Main() {
           )}
         </section>
       </div>
-      <div className="container mx-auto   w-3/4 ">
+      <div className="   ">
         <ReactPaginate
           className="paginate "
           breakLabel="..."

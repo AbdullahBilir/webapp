@@ -2,6 +2,7 @@ import React from "react";
 import { FaRegUser, FaRegHeart } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -18,8 +19,10 @@ function Header() {
         </div>
         <div className="flex basis-1/4  justify-between ">
           <div className="flex items-center gap-1 hover:text-amber-600 cursor-pointer transition-all duration-300">
-            <FaRegUser className="" />
-            Giriş Yapınız
+            <Link className="flex items-center gap-1" to="/singIn">
+              <FaRegUser className="" />
+              Giriş Yapınız
+            </Link>
           </div>
           <div className="flex items-center gap-1 hover:text-amber-600 cursor-pointer transition-all duration-300 ">
             <FaRegHeart className="" />
