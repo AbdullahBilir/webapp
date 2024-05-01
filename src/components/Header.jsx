@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaRegUser, FaRegHeart } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const userName = useSelector((state) => state.login);
+
   return (
     <header>
       <div className="container  flex py-2  items-center justify-between mb-4 flex-wrap">
@@ -21,7 +24,7 @@ function Header() {
           <div className="flex items-center gap-1 hover:text-amber-600 cursor-pointer transition-all duration-300">
             <Link className="flex items-center gap-1" to="/singIn">
               <FaRegUser className="" />
-              Giriş Yapınız
+              {userName.login ? userName.login : " Giriş Yapınız"}
             </Link>
           </div>
           <div className="flex items-center gap-1 hover:text-amber-600 cursor-pointer transition-all duration-300 ">

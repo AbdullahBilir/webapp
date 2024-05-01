@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 function SingOut() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [userDataArray, setUserDataArray] = useState([]);
 
   useEffect(() => {
@@ -23,6 +24,7 @@ function SingOut() {
     const newUser = {
       email: email,
       password: password,
+      name: name,
     };
 
     setUserDataArray([...userDataArray, newUser]);
@@ -33,6 +35,17 @@ function SingOut() {
       <div className=" p-8 bg-slate-100 w-[350px] rounded-md shadow-md">
         <h2 className="text-3xl text-slate-600 ">Sing Out</h2>
         <form className="form-control" onSubmit={handleClick}>
+          <div className="my-3 ">
+            <p className="my-2">Kullanıcı Ad</p>
+            <input
+              type="text"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              className="py-2 w-full px-4"
+            />
+          </div>
+
           <div className="my-3 ">
             <p className="my-2">Email</p>
             <input
