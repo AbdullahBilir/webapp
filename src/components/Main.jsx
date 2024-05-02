@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCategory, fetchItems, getCategory } from "../redux/Slice";
 import Loading from "./Loading";
 import ReactPaginate from "react-paginate";
+import { addElement } from "../redux/LoginSlice";
 
 function Main() {
   const [value, setİtem] = useState("");
@@ -43,6 +44,10 @@ function Main() {
     setItemOffset(newOffset);
   };
 
+  const handleClick = (eleman) => {
+    dispatch(addElement({ eleman }));
+  };
+
   useEffect(() => {
     if (value) {
       dispatch(getCategory(value));
@@ -64,8 +69,8 @@ function Main() {
           className=" border-none py-2 px-4 bg-slate-200 rounded-md"
         >
           <option value={""}>Seçiniz</option>
-          <option value={"dec"}>Artan</option>
-          <option value={"inc"}>Azalan</option>
+          <option value={"inc"}>Artan</option>
+          <option value={"dec"}>Azalan</option>
         </select>
       </div>
       <div className="flex">
@@ -117,6 +122,9 @@ function Main() {
                 return (
                   <div
                     key={eleman.id}
+                    onClick={() => {
+                      handleClick(eleman);
+                    }}
                     className={`w-1/3 border-solid w-[275px]   border-black m-2 hover:border-2 rounded-md h-72 flex flex-col  items-center justify-center text-center cursor-pointer  `}
                   >
                     <img

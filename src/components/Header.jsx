@@ -11,7 +11,9 @@ function Header() {
   return (
     <header>
       <div className="container  flex py-2  items-center justify-between mb-4 flex-wrap">
-        <div className="text-4xl ">E-commerce</div>
+        <div className="text-4xl ">
+          <Link to={"/"}>E-commerce</Link>
+        </div>
         <div className=" flex basis-2/5 items-center justify-end">
           <input
             className="w-96 py-1 px-4 rounded text-black relative  "
@@ -32,8 +34,10 @@ function Header() {
             Favorilerim
           </div>
           <div className="flex items-center gap-1 hover:text-amber-600 cursor-pointer transition-all duration-300">
-            <FiShoppingCart className="text-lg" />
-            Sepetim
+            <Link className="flex gap-1" to={"/sepetim"}>
+              <FiShoppingCart className="text-lg" />
+              Sepetim
+            </Link>
           </div>
         </div>
       </div>
